@@ -1,7 +1,28 @@
+let screenManager;
+
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(windowWidth, windowHeight);
+  textFont("monospace");
+
+  screenManager = new ScreenManager();
+  createDemoScreens(screenManager);
+  screenManager.setScreen("home");
 }
 
 function draw() {
-  background(220);
+  screenManager.update(deltaTime / 1000);
+  screenManager.render();
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  screenManager.resize(width, height);
+}
+
+function mousePressed() {
+  screenManager.mousePressed();
+}
+
+function keyPressed() {
+  screenManager.keyPressed();
 }
