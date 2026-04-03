@@ -2,39 +2,27 @@ let screenManager;
 
 function preload() {
   SoundManager.loadSfx("testing", "../assets/ahh.wav");
+  SoundManager.loadMusic("bgmusic", "./devassets/testingbg.mp3");
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   textFont("monospace");
 
-  // handle screens
+  manager.register("menu", new MenuScreen());
+  manager.register("game", new GameScreen());
 
-  screenManager = new ScreenManager();
-  createDemoScreens(screenManager);
-  screenManager.setScreen("home");
+  manager.switchTo("menu");
 }
 
 function draw() {
-  screenManager.update(deltaTime / 1000);
-  screenManager.render();
-}
-
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-  if (screenManager) {
-    screenManager.resize(width, height);
-  }
-}
-
-function mousePressed() {
-  if (screenManager) {
-    screenManager.mousePressed();
-  }
+  manager.draw();
 }
 
 function keyPressed() {
-  if (screenManager) {
-    screenManager.keyPressed();
-  }
+  manager.keyPressed();
+}
+
+function mousePressed() {
+  manager.mousePressed();
 }
