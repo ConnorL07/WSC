@@ -8,6 +8,7 @@ class ButtonManager {
     }
 
     display() {
+        console.log(this.buttons)
         this.buttons.forEach(button => button.display());
     }
 
@@ -20,4 +21,3 @@ class ButtonManager {
     }
       
 }
-//constructor(img, x, y, w, h, onClick) { ... }

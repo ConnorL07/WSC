@@ -3,6 +3,8 @@ let screenManager;
 function preload() {
   SoundManager.loadSfx("testing", "../assets/ahh.wav");
   SoundManager.loadMusic("bgmusic", "./devassets/testingbg.mp3");
+  playButton = loadImage("devassets/playbtn.png");
+  
 }
 
 function setup() {
