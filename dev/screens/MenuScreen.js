@@ -24,14 +24,14 @@ class MenuScreen extends Screen {
 
   keyPressed() {
     if (keyCode === ENTER) {
-      manager.switchTo("game");
+      manager.switchTo("game", true);
       SoundManager.playSfx("testing", 0.1);
     }
   }
 
   mousePressed() {
-    if (this.startBtn.isClicked()) {
-      manager.switchTo('game');
+    if (this.startBtn.isHovered()) {
+      manager.switchTo('game', true);
     }
   }
 }

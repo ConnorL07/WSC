@@ -13,7 +13,10 @@ function setup() {
   manager.register("menu", new MenuScreen());
   manager.register("game", new GameScreen());
 
-  manager.switchTo("menu");
+  manager.fadeColor = 0;
+  manager.fadeSpeed = 20;
+
+  manager.switchTo("menu", false);
 }
 
 function draw() {
