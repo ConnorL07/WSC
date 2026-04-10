@@ -4,16 +4,12 @@ class MenuScreen extends Screen {
     super();
     this.mainMenuBg = Assets.backgroundImg;
     this.wildSlideLogo = Assets.logoImg;
-    this.buttons = new ButtonManager();
-
   }
 
   onEnter() {
     console.log("Menu is now active");
 
-    this.buttons.clear(); // optional, if switching screens
-
-    this.buttons.add(new Button(Assets.playBtn, width / 2, height * 0.45, 199, 109, () => manager.switchTo("game")))
+    this.startBtn = new Button(width * 0.5, height * 0.45, 199, 109, Assets.playBtn);
   }
 
   draw() {
@@ -23,8 +19,7 @@ class MenuScreen extends Screen {
     imageMode(CENTER);
     image(this.wildSlideLogo, width / 2, height * 0.2, this.wildSlideLogo.width * 0.7, this.wildSlideLogo.height * 0.7);
 
-    this.buttons.display();
-
+    this.startBtn.draw();
   }
 
   keyPressed() {
@@ -35,6 +30,8 @@ class MenuScreen extends Screen {
   }
 
   mousePressed() {
-    this.buttons.handleClick();
+    if (this.startBtn.isClicked()) {
+      manager.switchTo('game');
+    }
   }
 }
