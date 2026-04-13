@@ -4,6 +4,10 @@ class SlidePuzzle {
     this.img = img;
     this.tileSize = tileSize;
 
+    // Compute slice size based on the ORIGINAL image dimensions
+    this.sliceW = this.img.width / this.gridSize;
+    this.sliceH = this.img.height / this.gridSize;
+
     this.tiles = [];
     this.blank = { x: gridSize - 1, y: gridSize - 1 };
 
@@ -16,6 +20,7 @@ class SlidePuzzle {
 
     for (let y = 0; y < this.gridSize; y++) {
       for (let x = 0; x < this.gridSize; x++) {
+        // Skip the blank tile
         if (x === this.gridSize - 1 && y === this.gridSize - 1) continue;
 
         this.tiles.push({
@@ -63,10 +68,10 @@ class SlidePuzzle {
   handleInput(key) {
     let target = null;
 
-    if (key === "w") target = { x: this.blank.x, y: this.blank.y + 1 };
-    if (key === "s") target = { x: this.blank.x, y: this.blank.y - 1 };
-    if (key === "a") target = { x: this.blank.x + 1, y: this.blank.y };
-    if (key === "d") target = { x: this.blank.x - 1, y: this.blank.y };
+    if (key === "w") target = { x: this.blank.x, y: this.blank.y - 1 }; // UP
+    if (key === "s") target = { x: this.blank.x, y: this.blank.y + 1 }; // DOWN
+    if (key === "a") target = { x: this.blank.x - 1, y: this.blank.y }; // LEFT
+    if (key === "d") target = { x: this.blank.x + 1, y: this.blank.y }; // RIGHT
 
     if (!target) return;
 
@@ -86,18 +91,20 @@ class SlidePuzzle {
     imageMode(CORNER);
 
     this.tiles.forEach(tile => {
-      const sx = tile.correctX * this.tileSize;
-      const sy = tile.correctY * this.tileSize;
+      const sx = tile.correctX * this.sliceW;
+      const sy = tile.correctY * this.sliceH;
+
       const dx = tile.x * this.tileSize;
       const dy = tile.y * this.tileSize;
 
       image(
         this.img,
-        dx, dy, this.tileSize, this.tileSize,
-        sx, sy, this.tileSize, this.tileSize
+        dx, dy, this.tileSize, this.tileSize,  // destination
+        sx, sy, this.sliceW, this.sliceH       // source slice
       );
     });
 
+    // Draw blank tile
     fill(50);
     noStroke();
     rect(
