@@ -14,7 +14,6 @@ function loadAssets() {
   Assets.logoImg = loadImage('assets/wild_slide.png');
   Assets.backgroundImg = loadImage('assets/background.png');
 
-  // Load level images
   Levels.forEach(level => {
     Assets.levelImages[level.id] = loadImage(level.image);
   });

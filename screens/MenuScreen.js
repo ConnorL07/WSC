@@ -14,9 +14,11 @@ class MenuScreen extends Screen {
 
   draw() {
     imageMode(CENTER);
-    image(this.mainMenuBg, width / 2, height / 2, this.mainMenuBg.width * 0.8, this.mainMenuBg.height * 0.8);
+    image(this.mainMenuBg, width / 2, height / 2, width, height);
 
-    image(this.wildSlideLogo, width / 2, height * 0.2, this.wildSlideLogo.width * 0.7, this.wildSlideLogo.height * 0.7);
+    image(this.wildSlideLogo, width / 2, height * 0.2,
+          this.wildSlideLogo.width * 0.7,
+          this.wildSlideLogo.height * 0.7);
 
     this.startBtn.draw();
     this.settingsBtn.draw();
@@ -25,7 +27,7 @@ class MenuScreen extends Screen {
 
   mousePressed() {
     if (this.startBtn.isHovered()) {
-      manager.switchTo("game1", true);  // FIXED
+      manager.switchTo("game1", true);
       SoundManager.playSfx("testing", 0.5);
     }
   }
