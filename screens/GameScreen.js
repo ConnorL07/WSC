@@ -12,8 +12,19 @@ class GameScreen extends Screen {
     this.puzzle = new SlidePuzzle(
       level.grid,
       Assets.levelImages[level.id],
-      150
+      150,
+      () => this.onPuzzleSolved()   // callback
     );
+  }
+
+  onPuzzleSolved() {
+    console.log("Level complete!");
+
+    if (this.levelId === 1) {
+      manager.switchTo("game2", true);
+    } else {
+      console.log("No more levels!");
+    }
   }
 
   draw() {
