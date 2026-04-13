@@ -3,7 +3,8 @@ const Assets = {
   exitBtn: null,
   settingsBtn: null,
   logoImg: null,
-  backgroundImg: null
+  backgroundImg: null,
+  levelImages: {}
 };
 
 function loadAssets() {
@@ -12,4 +13,9 @@ function loadAssets() {
   Assets.settingsBtn = loadImage('assets/settingsbtn.png');
   Assets.logoImg = loadImage('assets/wild_slide.png');
   Assets.backgroundImg = loadImage('assets/background.png');
+
+  // Load level images
+  Levels.forEach(level => {
+    Assets.levelImages[level.id] = loadImage(level.image);
+  });
 }

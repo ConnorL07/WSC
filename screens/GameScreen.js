@@ -1,12 +1,34 @@
 class GameScreen extends Screen {
+  constructor(levelId = 1) {
+    super();
+    this.levelId = levelId;
+  }
+
   onEnter() {
     SoundManager.playMusic("bgmusic", 0.5);
-    this.score = 0;
+
+    const level = Levels.find(l => l.id === this.levelId);
+
+    this.puzzle = new SlidePuzzle(
+      level.grid,
+      Assets.levelImages[level.id],
+      150
+    );
   }
 
   draw() {
     background(0);
-    fill(255);
-    text("Score: " + this.score, 100, 100);
+
+    push();
+    translate(
+      width / 2 - (this.puzzle.gridSize * this.puzzle.tileSize) / 2,
+      height / 2 - (this.puzzle.gridSize * this.puzzle.tileSize) / 2
+    );
+    this.puzzle.draw();
+    pop();
+  }
+
+  keyPressed() {
+    this.puzzle.handleInput(key);
   }
 }

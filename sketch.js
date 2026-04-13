@@ -11,7 +11,8 @@ function setup() {
   textFont("monospace");
 
   manager.register("menu", new MenuScreen());
-  manager.register("game", new GameScreen());
+  manager.register("game", new GameScreen(1));
+  manager.register("game", new GameScreen(2));
 
   manager.fadeColor = 0;
   manager.fadeSpeed = 20;
