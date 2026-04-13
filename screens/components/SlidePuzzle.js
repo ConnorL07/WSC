@@ -5,7 +5,6 @@ class SlidePuzzle {
     this.tileSize = tileSize;
     this.onSolved = onSolved;
 
-    // Slice sizes based on original image
     this.sliceW = this.img.width / this.gridSize;
     this.sliceH = this.img.height / this.gridSize;
 
@@ -59,11 +58,9 @@ class SlidePuzzle {
 
     const oldBlank = { ...this.blank };
 
-    // Move blank into tile position
     this.blank.x = tile.x;
     this.blank.y = tile.y;
 
-    // Move tile into blank position
     tile.x = oldBlank.x;
     tile.y = oldBlank.y;
   }
@@ -109,7 +106,6 @@ class SlidePuzzle {
       );
     });
 
-    // Draw blank tile
     fill(50);
     noStroke();
     rect(
